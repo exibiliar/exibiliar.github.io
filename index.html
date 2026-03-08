@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosimo Leoni - IT Specialist & Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --text-tertiary: #707070;
+            --accent: #00d9ff;
+            --accent-hover: #00f0ff;
+            --accent-dim: rgba(0, 217, 255, 0.1);
+            --border: #2a2a2a;
+            --shadow: rgba(0, 217, 255, 0.1);
+            --shadow-hover: rgba(0, 217, 255, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-tertiary: #6a6a6a;
+            --accent: #0088cc;
+            --accent-hover: #0099dd;
+            --accent-dim: rgba(0, 136, 204, 0.1);
+            --border: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '>';
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem 0.7rem;
+            border-radius: 0.5rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 6rem;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-role {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease 0.5s backwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-dim);
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-text strong {
+            color: var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.2rem;
+            border-radius: 0.8rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+            animation: fadeInLeft 0.6s ease;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 0 4px var(--accent-dim);
+        }
+
+        .timeline-date {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-company {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .timeline-description ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, var(--accent-dim));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px var(--shadow-hover);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid var(--border);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-link:hover {
+            color: var(--accent-hover);
+            transform: translateX(3px);
+        }
+
+        .education-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            border-radius: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+
+        .education-degree {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-school {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .education-year {
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .education-details {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .education-details ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            padding: 0.8rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-hover);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links a:not(.theme-toggle) {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-cta .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item::before {
+                left: -2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">exibiliar</a>
+            <ul class="nav-links">
+                <li><a href="#home">home</a></li>
+                <li><a href="#about">about</a></li>
+                <li><a href="#experience">experience</a></li>
+                <li><a href="#projects">projects</a></li>
+                <li><a href="#education">education</a></li>
+                <li><button class="theme-toggle" id="themeToggle">☀️</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">&lt;Hi, I'm /&gt;</p>
+                <h1 class="hero-title">Cosimo <span>Leoni</span></h1>
+                <p class="hero-role">IT Assistant & Network Specialist</p>
+                <p class="hero-description">
+                    Just a typical nerd appassionato di tecnologia, networking e progetti maker. 
+                    Lavoro presso Vignamaggio come IT Assistant occupandomi di infrastrutture IT e reti, 
+                    con forte interesse per Python, CAD modeling, stampa 3D e open source hardware.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>→</span> View Projects
+                    </a>
+                    <a href="https://github.com/exibiliar" target="_blank" class="btn btn-secondary">
+                        <span>⌘</span> GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/cosimoleoni-49ba47184" target="_blank" class="btn btn-secondary">
+                        <span>⚡</span> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">// About Me</p>
+                <h2 class="section-title">Chi Sono</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Sono un <strong>IT Specialist</strong> con esperienza pluriennale nell'assistenza tecnica, 
+                        gestione reti e amministrazione sistemi. Attualmente lavoro come IT Assistant 
+                        e Network Specialist presso <strong>Vignamaggio</strong> in Greve in Chianti.
+                    </p>
+                    <p>
+                        La mia esperienza include manutenzione hardware Dell, supporto help desk remoto, 
+                        configurazione Active Directory, gestione infrastrutture di rete e troubleshooting sistemistico. 
+                        Ho lavorato per anni con <strong>Computer Care</strong> fornendo assistenza tecnica presso Regione Toscana.
+                    </p>
+                    <p>
+                        Nel tempo libero mi dedico a progetti <strong>maker</strong>: stampa 3D, Arduino, Raspberry Pi, 
+                        droni e fotografia. Sto imparando Python e CAD modeling, con particolare focus su 
+                        <strong>Fusion 360</strong> per la progettazione di componenti meccanici.
+                    </p>
+                    <p>
+                        Ho frequentato <strong>Ingegneria Informatica</strong> presso l'Università di Firenze dal 2018 al 2024, 
+                        dove ho sviluppato competenze avanzate in networking e sistemi distribuiti.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 2rem; font-size: 1.2rem;">Tech Stack</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">💻</div>
+                            <div class="skill-name">C/C++</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🌐</div>
+                            <div class="skill-name">HTML/CSS</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">☕</div>
+                            <div class="skill-name">Java</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">📜</div>
+                            <div class="skill-name">JavaScript</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🐘</div>
+                            <div class="skill-name">PHP</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🐍</div>
+                            <div class="skill-name">Python</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">⚙️</div>
+                            <div class="skill-name">Assembly</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">📊</div>
+                            <div class="skill-name">SQL</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🗄️</div>
+                            <div class="skill-name">MySQL</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">📝</div>
+                            <div class="skill-name">LaTeX</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">💾</div>
+                            <div class="skill-name">Bash</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">📐</div>
+                            <div class="skill-name">AutoCAD</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🐧</div>
+                            <div class="skill-name">Linux</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🐳</div>
+                            <div class="skill-name">Docker</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🔧</div>
+                            <div class="skill-name">Arduino</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🥧</div>
+                            <div class="skill-name">Raspberry Pi</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">📐</div>
+                            <div class="skill-name">Fusion 360</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🖨️</div>
+                            <div class="skill-name">3D Print</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🎬</div>
+                            <div class="skill-name">Premiere</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🌐</div>
+                            <div class="skill-name">Network</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🔐</div>
+                            <div class="skill-name">Active Dir</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">📡</div>
+                            <div class="skill-name">Ruckus</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">📶</div>
+                            <div class="skill-name">UniFi</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🖥️</div>
+                            <div class="skill-name">HPE</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🍽️</div>
+                            <div class="skill-name">MICROS Simphony</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🔶</div>
+                            <div class="skill-name">Oracle DB</div>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">⚙️</div>
+                            <div class="skill-name">EMC Console</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">// Career Path</p>
+                <h2 class="section-title">Esperienza</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p class="timeline-date">Aprile 2024 - Presente</p>
+                    <h3 class="timeline-title">IT Assistant & Network Specialist</h3>
+                    <p class="timeline-company">Vignamaggio - Greve in Chianti, Toscana</p>
+                    <p class="timeline-description">
+                        Gestione completa dell'infrastruttura IT aziendale, amministrazione reti, 
+                        configurazione e manutenzione server, supporto utenti e implementazione soluzioni tecnologiche.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <p class="timeline-date">Settembre 2021 - Dicembre 2023</p>
+                    <h3 class="timeline-title">Tecnico Informatico - Help Desk</h3>
+                    <p class="timeline-company">Computer Care S.r.l. - Sesto Fiorentino</p>
+                    <div class="timeline-description">
+                        <p>Assistenza tecnica presso Regione Toscana (attività non continuativa per esigenze universitarie):</p>
+                        <ul>
+                            <li>Assistenza remota tramite Anydesk e TeamViewer</li>
+                            <li>Manutenzione e sostituzione macchine Dell</li>
+                            <li>Gestione troubleshooting sistemistico</li>
+                            <li>Supporto help desk multi-livello</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <p class="timeline-date">Maggio 2021 - Giugno 2021</p>
+                    <h3 class="timeline-title">Tecnico Informatico</h3>
+                    <p class="timeline-company">Computer Care S.r.l.</p>
+                    <div class="timeline-description">
+                        <ul>
+                            <li>Ghosting PC e configurazione iniziale</li>
+                            <li>Consegna PC agli utenti finali</li>
+                            <li>Setup postazioni di lavoro</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <p class="timeline-date">Dicembre 2016 - Agosto 2017</p>
+                    <h3 class="timeline-title">Programmatore (Stage)</h3>
+                    <p class="timeline-company">Direzione Sistemi Informativi - Comune di Firenze</p>
+                    <div class="timeline-description">
+                        <ul>
+                            <li>Ricerca e integrazione QR Code per "Firenze The Walking City"</li>
+                            <li>Ricerca coordinate GPS per posizionamento QR Code</li>
+                            <li>Gestione database per creazione e integrazione nuovi QR Code</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">// Portfolio</p>
+                <h2 class="section-title">Progetti</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🔧</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Threaded Insert Press</h3>
+                        <p class="project-description">
+                            Pressa open source per inserti filettati stampati in 3D. 
+                            Progetto completamente parametrico realizzato in Fusion 360.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Fusion 360</span>
+                            <span class="tag">3D Print</span>
+                            <span class="tag">Open Source</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/exibiliar/Threaded-Insert-Press-Open-source" class="project-link" target="_blank">
+                                <span>→</span> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">⚙️</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E3NG 1.2 Config</h3>
+                        <p class="project-description">
+                            Configurazione e ottimizzazione per stampante 3D E3NG. 
+                            Setup firmware, profili di stampa e configurazioni hardware.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Marlin</span>
+                            <span class="tag">3D Print</span>
+                            <span class="tag">Config</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/exibiliar/E3NG-1.2-Config" class="project-link" target="_blank">
+                                <span>→</span> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🎓</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Protocollo LIONET</h3>
+                        <p class="project-description">
+                            Tesi universitaria su modulazione di rete Peer-to-Peer basata su protocollo LIONET 
+                            per reti pubbliche. Ricerca e implementazione.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Networking</span>
+                            <span class="tag">P2P</span>
+                            <span class="tag">Research</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🗺️</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Firenze The Walking City</h3>
+                        <p class="project-description">
+                            Integrazione QR Code per applicazione turistica del Comune di Firenze. 
+                            Gestione database e georeferenziazione punti di interesse.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Database</span>
+                            <span class="tag">QR Code</span>
+                            <span class="tag">GIS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🔌</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Homelab Projects</h3>
+                        <p class="project-description">
+                            Progetti vari con Raspberry Pi, Arduino, ESP8266/32. 
+                            Automazione, monitoring, IoT e sperimentazione hardware.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">IoT</span>
+                            <span class="tag">Arduino</span>
+                            <span class="tag">RaspberryPi</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/exibiliar" class="project-link" target="_blank">
+                                <span>→</span> More on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">📸</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Photography & Video</h3>
+                        <p class="project-description">
+                            Fotografia, video editing con Adobe Premiere Pro, 
+                            riprese con droni e post-produzione.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Photography</span>
+                            <span class="tag">Premiere Pro</span>
+                            <span class="tag">Drones</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">// Education</p>
+                <h2 class="section-title">Formazione</h2>
+            </div>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3 class="education-degree">Ingegneria Informatica</h3>
+                    <p class="education-school">Università degli Studi di Firenze</p>
+                    <p class="education-year">2018 - 2024</p>
+                    <div class="education-details">
+                        <p>Percorso universitario in Ingegneria Informatica con focus su networking, sistemi distribuiti e architetture software.</p>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <h3 class="education-degree">Diploma di Perito Tecnico Informatico e delle Telecomunicazioni</h3>
+                    <p class="education-school">I.S.I.S. Gobetti-Volta, Bagno a Ripoli</p>
+                    <p class="education-year">2013 - 2018</p>
+                    <div class="education-details">
+                        <p>Competenze acquisite:</p>
+                        <ul>
+                            <li>Programmazione Web (JavaScript, HTML, PHP, CSS)</li>
+                            <li>Programmazione Software (Java, C, Assembly)</li>
+                            <li>Gestione Database (Access, MySQL)</li>
+                            <li>Gestione Reti (Cisco Packet Tracer)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://github.com/exibiliar" class="social-link" target="_blank" title="GitHub">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/in/cosimoleoni-49ba47184" class="social-link" target="_blank" title="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="/cdn-cgi/l/email-protection#721e171d1c1b111d011b1f1d4b4b32151f131b1e5c111d1f" class="social-link" title="Email">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+                <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
+                    &copy; 2024 Cosimo Leoni | Made with ☕ and 💻
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .timeline-item, .education-card, .skill-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)
